@@ -28,12 +28,30 @@ function IdentifyImg(){
     img=document.getElementById("pic");
     classifier.classify(img, gotResult);
 }
+
 function gotResult(error,result){
 if (error){
     console.error("ERR0R")
 }
-else(
-    console.log(result)
-)
+else{
+    console.log(result);
+    NewNo=result[0].confidence.toFixed(2)*100;
+    console.log(NewNo);
+    if(NewNo<=50){
+        document.getElementById("Accuracy").style.color="red";
+        console.log("red");
+    }
+    else if(NewNo>50 && NewNo<=75){
+        document.getElementById("Accuracy").style.color="yellow"; 
+        console.log("yellow");
+    }
+    else if(NewNo>=76.0){
+        document.getElementById("Accuracy").style.color="green"; 
+        console.log("green");
+    }
+    document.getElementById("Object").innerHTML=result[0].label;
+    document.getElementById("Accuracy").innerHTML=NewNo+"%";
 }
-    
+}
+
+   
